@@ -59,7 +59,8 @@ def login(request):
             return redirect(request.GET.get('from', reverse('home')))
     else:
         login_form = LoginForm()
-
+        if request.user.is_authenticated:
+            return redirect(request.GET.get('from', reverse('home')))
     context = {}
     context['login_form'] = login_form
     return render(request, 'login.html', context)
